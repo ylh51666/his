@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.model.mapper.MedicalRecordMapper" >
+
+	<insert id="saveMedicalRecord" parameterType="MedicalRecord">
+		insert into medicalRecord 
+		(pid,description,medicalhistory,familyhistory,initialresult,status,operator,operateDate)
+		values
+		(#{pid},#{description},#{medicalhistory},#{familyhistory},#{initialresult},1,#{operator},CURDATE())
+	</insert>
+	
+	<select id="getMedicalRecord" parameterType="int" resultMap="pResult">
+		select  p.*,l.levelname,c.dname,d.deptname,m.*
+		from patient p,level l,doctor c,dept d ,medicalrecord m
+		where 
+		p.pid = m.pid and p.levelid = l.id and p.deptid = d.id and p.doctorid = c.id 
+		and p.pid = #{pid}
+	</select>
+	<resultMap type="Patient" id="pResult">
+		<result property="pid" column="pid"/>
+		<result property="pname" column="pname"/>
+		<result property="gender" column="gender"/>
+		<result property="idcard" column="idcard"/>
+		<result property="createDate" column="createDate"/>
+		<result property="pstatus" column="pstatus"/>
+		<result property="status" column="status"/>
+		<association property="level" column="levelid" javaType="Level" resultMap="levelResult"></association>
+		<association property="dept" column="deptid" javaType="Dept" resultMap="deptResult"></association>
+		<association property="doctor" column="doctorid" javaType="Doctor" resultMap="doctorResult"></association>
+		<association property="medicalRecord" column="pid" javaType="MedicalRecord" resultMap="medicalRecordResult"></association>
+	</resultMap>
+	<resultMap type="Level" id="levelResult">
+		<result property="levelname" column="levelname"/>
+	</resultMap>
+	<resultMap type="Dept" id="deptResult">
+		<result property="deptname" column="deptname"/>
+	</resultMap>
+	<resultMap type="Doctor" id="doctorResult">
+		<result property="dname" column="dname"/>
+	</resultMap>
+	<resultMap type="MedicalRecord" id="medicalRecordResult">
+		<result property="description" column="description"/>
+		<result property="medicalhistory" column="medicalhistory"/>
+		<result property="familyhistory" column="familyhistory"/>
+		<result property="initialresult" column="initialresult"/>
+		<result property="result" column="result"/>
+		<result property="finalresult" column="finalresult"/>
+	</resultMap>
+	
+	<update id="updateFinalResult" parameterType="map">
+		update medicalrecord set result = #{result} , finalresult = #{finalResult} 
+		where pid = #{pid}
+	</update>
+</mapper>

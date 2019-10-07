@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.model.mapper.InspectItemRecordMapper" >
+
+	
+	<select id="saveInspectItemRecord" parameterType="InspectItemRecord">
+		insert into inspectitemrecord (pid,inspectid,amount,paystatus)
+		values(#{pid},#{inspectid},#{amount},#{paystatus})
+	</select>
+	
+	<select id="getInspectItemRecords" parameterType="int" resultMap="iResult">
+		select 
+		iir.amount,iir.paystatus,ii.inspectitem,ii.price,p.*,l.levelname,d.deptname ,c.dname
+		from inspectitemrecord iir,patient p,inspectitem ii,level l, dept d,doctor c
+		where iir.pid = p.pid and iir.inspectid = ii.id and p.levelid = l.id and p.deptid = d.id and p.doctorid  = c.id and p.pid = #{pid}
+	</select>
+	<resultMap type="InspectItemRecord" id="iResult">
+		<result property="amount" column="amount"/>
+		<result property="paystatus" column="paystatus"/>
+		<association property="inspectItem" column="id" javaType="InspectItem" resultMap="inspectItemResult"></association>
+		<association property="patient" column="pid" javaType="Patient" resultMap="patientResult"></association>
+	</resultMap>
+	<resultMap type="InspectItem" id="inspectItemResult">
+		<result property="inspectItem" column="inspectItem"/>
+		<result property="price" column="price"/>
+	</resultMap>
+	<resultMap type="Patient" id="patientResult">
+		<result property="pid" column="pid"/>
+		<result property="pname" column="pname"/>
+		<result property="gender" column="gender"/>
+		<result property="idcard" column="idcard"/>
+		<result property="createDate" column="createDate"/>
+		<result property="pstatus" column="pstatus"/>
+		<result property="status" column="status"/>
+		<association property="level" column="levelid" javaType="Level" resultMap="levelResult"></association>
+		<association property="dept" column="deptid" javaType="Dept" resultMap="deptResult"></association>
+		<association property="doctor" column="doctorid" javaType="Doctor" resultMap="doctorResult"></association>
+	</resultMap>
+	<resultMap type="Level" id="levelResult">
+		<result property="levelname" column="levelname"/>
+	</resultMap>
+	<resultMap type="Dept" id="deptResult">
+		<result property="deptname" column="deptname"/>
+	</resultMap>
+	<resultMap type="Doctor" id="doctorResult">
+		<result property="dname" column="dname"/>
+	</resultMap>
+</mapper>

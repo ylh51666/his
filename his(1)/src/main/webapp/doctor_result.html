@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>医生工作站_确诊</title>
+		<link rel="stylesheet" type="text/css" href="css/doctor_result.css"/>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/doctor_result.js"></script>
+	</head>
+	<body>
+		<div id="div1">
+			<div class="div1_nav" >
+				<span id="div1_1">病历首页</span>
+			</div>
+			<div class="div1_nav" >
+				<span id="div1_2">检查申请</span>
+			</div>
+			<div class="div1_nav" >
+				<span id="div1_3">检验申请</span>
+			</div>
+			<div class="div1_nav" >
+				<span id="div1_4">确诊</span>
+			</div>
+			<div class="div1_logout" >
+				你好！<span id="username"></span>医生&nbsp;&nbsp;&nbsp;
+				<span id="div1_5">退出登录</span>
+			</div>
+		</div>
+		<div id="div3">
+			<div id="div3_1">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;病历号：<input type="text" id="pid" class="form_controller"/>&nbsp;&nbsp;<img src="img/search.png" id="rearch">
+			</div>
+			<div id="div3_2">
+				<div>
+					 &nbsp;&nbsp;&nbsp;病历号：<input type="text" id="getpid" readonly="readonly" class="form_controller" />
+				</div>
+				<div>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;姓名：<input type="text" id="pname" readonly="readonly" class="form_controller" />
+				</div>
+				<div>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;性别：<input type="text" id="gender" readonly="readonly" class="form_controller" />
+				</div>
+			</div>
+			<div id="div3_3">
+				<div>
+					身份证号：<input type="text" id="idcard" readonly="readonly" class="form_controller" />
+				</div>
+				<div>
+					挂号级别：<input type="text" id="level" readonly="readonly" class="form_controller" />
+				</div>
+				<div>
+					是否已诊：<span id="flag"></span>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					状态：<span id="status"></span>
+				</div>
+			</div>
+			<div id="div3_4">
+				<div>
+					挂号科室：<input type="text" id="dept" readonly="readonly" class="form_controller" />
+				</div>
+				<div>
+					挂号医生：<input type="text" id="doctor" readonly="readonly" class="form_controller" />
+				</div>
+				<div>
+					挂号日期：<input type="date" id="createDate" readonly="readonly" class="form_controller"/>
+				</div>
+			</div>
+		</div>
+		<div id="div4">
+			病历信息
+		</div>
+		<div id="div5">
+			<div id="div5_1">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="font">主诉：</span><textarea name="description" id="description" readonly="readonly"></textarea>
+			</div>
+			<div id="div5_1">
+				&nbsp;&nbsp;&nbsp;<span class="font">疾病史：</span><textarea name="medicalhistory" id="medicalhistory" readonly="readonly"></textarea>
+			</div>
+			<div id="div5_1">
+				<span class="font">家族病史：</span><textarea name="familyhistory" id="familyhistory" readonly="readonly"></textarea>
+			</div>
+			<div id="div5_1">
+				<span class="font">初步诊断：</span><textarea name="initialresult" id="initialresult" readonly="readonly"></textarea>
+			</div>
+			<div id="div5_1">
+				<span class="font">检查结果：</span><textarea name="result" id="result"></textarea>
+			</div>
+			<div id="div5_1">
+				<span class="font">最终诊断：</span><textarea name="finalresult" id="finalresult" ></textarea>
+			</div>
+		</div>
+		<div id="div6">
+			<button type="button" id="submit">提交最终诊断结果</button>
+		</div>
+	</body>
+</html>

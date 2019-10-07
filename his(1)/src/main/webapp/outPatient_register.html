@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>东软云医院-挂号管理</title>
+	<link rel="stylesheet" type="text/css" href="css/outPatient_register.css"/>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/outPatient_register.js"></script>
+</head>
+<body>
+	<div id="div1">
+		<div class="div1_nav" >
+			<span id="div1_1">门诊挂号管理</span>
+		</div>
+		<div class="div1_nav" >
+			<span id="div1_2">门诊收费管理</span>
+		</div>
+		<div class="div1_nav" >
+			<span id="div1_3">门诊退号管理</span>
+		</div>
+		<div class="div1_logout" >
+			你好！管理员&nbsp;&nbsp;&nbsp;
+			<span id="div1_4">退出登录</span>
+		</div>
+	</div>
+	<div id="div2">
+		挂号信息
+	</div>
+	<div id="div3">
+		<form id="form1">
+			<div id="div3_1">
+				<div>
+					&nbsp;&nbsp;&nbsp;&nbsp;病历号：<input type="text" name="pid" id="pid" class="form_controller" /><span class="star">*</span>
+				</div>
+				<div>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;姓名：<input type="text" name="pname" class="form_controller" /><span class="star">*</span>
+				</div>
+				<div>
+					性别：<input type="radio" name="gender" value="男"/>男
+						<input type="radio" name="gender"  value="女"/>女
+						<span class="star">*</span>
+				</div>
+			</div>
+			<div id="div3_2">
+				<div>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年龄：<input type="text" name="age" id="age" class="form_controller" />
+				</div>
+				<div>
+					出生日期：<input type="text" name="year" id="year" class="birth"/> 年 <input type="text" name="month" id="month" class="birth"/> 月
+				</div>
+				<div>
+					是否需要病历本：<input type="radio" name="flag" id="yes" value="1"/>是
+						<input type="radio" name="flag" id="no" value="0"/>否<span class="star">*</span>
+				</div>
+			</div>
+			<div id="div3_3">
+				<div>
+					身份证号：<input type="text" name="idcard" class="form_controller" /><span class="star">*</span>
+				</div>
+				<div>
+					家庭住址：<input type="text" name="address" class="form_controller" />
+				</div>
+				<div>
+					挂号级别：<select name="levelid" id="level" class="select">
+						<option data-cost="0" value="-1">----请选择----</option>
+					</select><span class="star">*</span>
+				</div>
+			</div>
+			<div id="div3_4">
+				<div>
+					挂号科室：<select name="deptid" id="dept" class="select">
+						<option value="-1">----请选择----</option>
+					</select><span class="star">*</span>
+				</div>
+				<div>
+					挂号医生：<select name="doctorid" id="doctor" class="select">
+						<option value='-1'>-----请先选择科室-----</option>
+					</select><span class="star">*</span>
+				</div>
+				<div>
+					挂号日期：<input type="date" name="createDate" id="createDate" class="form_controller"/>
+				</div>
+			</div>
+			<div id="div3_5">
+				&nbsp;&nbsp;&nbsp;总金额：<input type="text" name="cost" id="cost" class="form_controller" value="0"/>
+			</div>
+			<div id="div3_6">
+				<button type="button" id="register">挂号</button>
+				<button type="button" id="reset">重置</button>
+			</div>
+		</form>
+	</div>
+	<div id="div4">
+		挂号信息列表
+		<div id="div4_1">
+			<img src="img/refresh.png" id="refresh"><span id="refresh">刷新</span>
+		</div>
+	</div>
+	<div id="div5">
+		<table id="data_table">
+			<tr>
+				<th>病历号</th>
+				<th>姓名</th>
+				<th>性别</th>
+				<th>身份证</th>
+				<th>挂号日期</th>
+				<th>挂号级别</th>
+				<th>是否已诊</th>
+				<th>状态</th>
+				<th>看诊科室</th>
+				<th>看诊医生</th>
+			</tr>
+		</table>
+	</div>
+	<div id="div6">
+		<button type="button" id="prePage" >上一页</button>
+		当前是第<span id="page">1</span>页
+		<button type="button" id="nextPage" >下一页</button>
+	</div>
+</body>
+</html>

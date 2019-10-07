@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.model.mapper.PatientMapper" >
+
+	<select id="getPatientNo" resultType="Patient">
+		select ifnull(max(pid),0)+1 pid 
+		from patient
+	</select>
+	
+	<select id="getPatientData" parameterType="map" resultMap="pResult">
+		select p.*,l.levelname levelname,d.deptname deptname,c.dname dname 
+		from patient p,level l,dept d,doctor c
+		where p.levelid = l.id and p.deptid = d.id and p.doctorid=c.id 
+		and createdate >= #{date} 
+		limit #{beginIndex},#{pageSize}
+	</select>
+	<resultMap type="Patient" id="pResult">
+		<result property="pid" column="pid"/>
+		<result property="pname" column="pname"/>
+		<result property="gender" column="gender"/>
+		<result property="idcard" column="idcard"/>
+		<result property="createDate" column="createDate"/>
+		<result property="pstatus" column="pstatus"/>
+		<result property="status" column="status"/>
+		<association property="level" column="levelid" javaType="Level" resultMap="levelResult"></association>
+		<association property="dept" column="deptid" javaType="Dept" resultMap="deptResult"></association>
+		<association property="doctor" column="doctorid" javaType="Doctor" resultMap="doctorResult"></association>
+	</resultMap>
+	<resultMap type="Level" id="levelResult">
+		<result property="levelname" column="levelname"/>
+	</resultMap>
+	<resultMap type="Dept" id="deptResult">
+		<result property="deptname" column="deptname"/>
+	</resultMap>
+	<resultMap type="Doctor" id="doctorResult">
+		<result property="dname" column="dname"/>
+	</resultMap>
+	
+	
+	<insert id="savePatient" parameterType="Patient">
+		insert into patient 
+		values
+		(#{pid},#{pname},#{gender},#{age},#{birthday},#{idcard},#{address},#{levelid},#{deptid},#{doctorid},#{createDate},#{cost},#{pstatus},#{status},#{operator},#{operateDate})
+	</insert>
+	
+	<select id="getPatientByNo" parameterType="int" resultMap="pResult">
+		select p.*,l.levelname levelname,d.deptname deptname,c.dname dname 
+		from patient p,level l,dept d,doctor c
+		where p.levelid = l.id and p.deptid = d.id and p.doctorid=c.id 
+		and p.pid = #{pid}
+	</select>
+	
+	<update id="updatePatientStatus" parameterType="map">
+		update patient set 
+		status = #{status},operator = #{operator},operateDate = #{operateDate},pstatus = #{pstatus} 
+		where pid = #{pid}
+	</update>
+	
+	<select id="getPatientDataByDoctor" parameterType="int" resultMap="pResult">
+		select p.*,l.levelname levelname,d.deptname deptname,c.dname dname 
+		from patient p,level l,dept d,doctor c
+		where p.levelid = l.id and p.deptid = d.id and p.doctorid=c.id 
+		and createdate = CURDATE() and p.doctorid = #{doctorid}
+	</select>
+	
+	
+	
+</mapper>

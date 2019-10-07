@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.model.mapper.CheckItemRecordMapper" >
+
+	
+	<select id="saveCheckItemRecord" parameterType="CheckItemRecord">
+		insert into checkitemrecord (pid,cid,amount,paystatus)
+		values(#{pid},#{cid},#{amount},#{paystatus})
+	</select>
+	
+	<select id="getCheckItemRecords" parameterType="int" resultMap="cResult">
+		select 
+		cir.amount,cir.paystatus,ci.itemname,ci.price,p.*,l.levelname,d.deptname ,c.dname
+		from checkitemrecord cir,patient p,checkitem ci,level l, dept d,doctor c
+		where cir.pid = p.pid and cir.cid = ci.id and p.levelid = l.id and p.deptid = d.id and p.doctorid  = c.id and p.pid = #{pid}
+	</select>
+	<resultMap type="CheckItemRecord" id="cResult">
+		<result property="amount" column="amount"/>
+		<result property="paystatus" column="paystatus"/>
+		<association property="checkItem" column="id" javaType="CheckItem" resultMap="checkItemResult"></association>
+		<association property="patient" column="pid" javaType="Patient" resultMap="patientResult"></association>
+	</resultMap>
+	<resultMap type="CheckItem" id="checkItemResult">
+		<result property="itemname" column="itemname"/>
+		<result property="price" column="price"/>
+	</resultMap>
+	<resultMap type="Patient" id="patientResult">
+		<result property="pid" column="pid"/>
+		<result property="pname" column="pname"/>
+		<result property="gender" column="gender"/>
+		<result property="idcard" column="idcard"/>
+		<result property="createDate" column="createDate"/>
+		<result property="pstatus" column="pstatus"/>
+		<result property="status" column="status"/>
+		<association property="level" column="levelid" javaType="Level" resultMap="levelResult"></association>
+		<association property="dept" column="deptid" javaType="Dept" resultMap="deptResult"></association>
+		<association property="doctor" column="doctorid" javaType="Doctor" resultMap="doctorResult"></association>
+	</resultMap>
+	<resultMap type="Level" id="levelResult">
+		<result property="levelname" column="levelname"/>
+	</resultMap>
+	<resultMap type="Dept" id="deptResult">
+		<result property="deptname" column="deptname"/>
+	</resultMap>
+	<resultMap type="Doctor" id="doctorResult">
+		<result property="dname" column="dname"/>
+	</resultMap>
+</mapper>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>医生工作站-检查申请</title>
+		<link rel="stylesheet" type="text/css" href="css/doctor_checkItem.css"/>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/doctor_checkItem.js"></script>
+	</head>
+	<body>
+		<div id="div1">
+			<div class="div1_nav" >
+				<span id="div1_1">病历首页</span>
+			</div>
+			<div class="div1_nav" >
+				<span id="div1_2">检查申请</span>
+			</div>
+			<div class="div1_nav" >
+				<span id="div1_3">检验申请</span>
+			</div>
+			<div class="div1_nav" >
+				<span id="div1_4">确诊</span>
+			</div>
+			<div class="div1_logout" >
+				你好！<span id="username"></span>医生&nbsp;&nbsp;&nbsp;
+				<span id="div1_5">退出登录</span>
+			</div>
+		</div>
+		<div id="div2">
+			挂号信息
+		</div>
+		<div id="div3">
+			<div id="div3_1">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;病历号：<input type="text" id="pid" class="form_controller"/>&nbsp;&nbsp;<img src="img/search.png" id="rearch">
+			</div>
+			<div id="div3_2">
+				<div>
+					 &nbsp;&nbsp;&nbsp;病历号：<input type="text" id="getpid" readonly="readonly" class="form_controller" />
+				</div>
+				<div>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;姓名：<input type="text" id="pname" readonly="readonly" class="form_controller" />
+				</div>
+				<div>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;性别：<input type="text" id="gender" readonly="readonly" class="form_controller" />
+				</div>
+			</div>
+			<div id="div3_3">
+				<div>
+					身份证号：<input type="text" id="idcard" readonly="readonly" class="form_controller" />
+				</div>
+				<div>
+					挂号级别：<input type="text" id="level" readonly="readonly" class="form_controller" />
+				</div>
+				<div>
+					是否已诊：<span id="flag"></span>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					状态：<span id="status"></span>
+				</div>
+			</div>
+			<div id="div3_4">
+				<div>
+					挂号科室：<input type="text" id="dept" readonly="readonly" class="form_controller" />
+				</div>
+				<div>
+					挂号医生：<input type="text" id="doctor" readonly="readonly" class="form_controller" />
+				</div>
+				<div>
+					挂号日期：<input type="date" id="createDate" readonly="readonly" class="form_controller"/>
+				</div>
+			</div>
+		</div>
+		<div id="div4">
+			挂号信息
+		</div>
+		<div id="div5">
+			<div id="div5_1">
+				检查项目：<select name="checkitem" id="checkitem" class="select">
+					<option value="-1">------请选择------</option>
+				</select>
+				<button type="button" id="add">添加检查</button>
+			</div>
+		</div>
+		<div id="div6">
+			<table id="data_table">
+				<tr>
+					<th>检查项目</th>
+					<th>数量</th>
+					<th>金额</th>
+					<th></th>
+				</tr>
+			</table>
+		</div>
+		<div id="div7">
+			<button type="button" id="submit">提交检查申请</button>
+		</div>
+	</body>
+</html>
